@@ -1,9 +1,16 @@
 <template>
   <div id="app">
-    <h1>拉钩教育</h1>
-    <!-- 跟路由的出口 -->
+    <!-- 根路由的出口 -->
     <router-view/>
+
   </div>
 </template>
+<script lang='ts'>
+import Vue from 'vue'
 
-<style lang="scss" scoped></style>
+export default Vue.extend({
+  name: 'App'
+})
+</script>
+<style lang="scss" scoped>
+</style>
