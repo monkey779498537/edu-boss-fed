@@ -1,10 +1,16 @@
 <template>
   <div class="layout">
     <el-container>
-      <el-aside width="200px">Aside</el-aside>
+      <el-aside width="200px">
+        <app-aside/>
+      </el-aside>
       <el-container>
-        <el-header>Header</el-header>
-        <el-main>Main</el-main>
+        <el-header>
+          <app-header/>
+        </el-header>
+        <el-main>
+          <router-view/>
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -12,10 +18,18 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import AppAside from './components/app-aside.vue'
+import AppHeader from './components/app-header.vue'
+
 export default Vue.extend({
-  name: 'layoutIndex'
+  name: 'layoutIndex',
+  components: {
+    AppAside,
+    AppHeader
+  }
 })
 </script>
+
 <style lang='scss' scoped>
   .el-container {
     min-height: 100vh; // 类似百分比,适应屏幕的高度，比如100vh，整屏
