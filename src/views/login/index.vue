@@ -56,10 +56,13 @@ export default Vue.extend({
             message: data.message
           })
         } else {
+          // 登录成功，记录登录状态，状态需要能够全局访问（放到Vuex）
+          this.$store.commit('setUser', data.content)
           //   ---成功：去到首页
-          this.$router.push({
-            name: 'home'
-          })
+          this.$router.push(this.$route.query.redirect as string || '/')
+          // this.$router.push({
+          //   name: 'home'
+          // })
           this.$message({
             message: data.message,
             type: 'success'

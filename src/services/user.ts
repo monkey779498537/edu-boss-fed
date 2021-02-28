@@ -20,3 +20,10 @@ export const login = (data: User) => {
     data: qs.stringify(data) // axios 默认发送的是application/json格式的数据请求
   })
 }
+
+export const getUserInfo = () => {
+  return request({
+    method: 'POST',
+    url: '/front/user/getInfo'
+  })
+}

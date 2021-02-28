@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Layout from '@/layout/index.vue'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -14,6 +15,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/',
     component: Layout,
+    meta: { requiresAuth: true },
     children: [
       {
         path: '', // 默认子路由
@@ -66,6 +68,34 @@ const routes: Array<RouteConfig> = [
 
 const router = new VueRouter({
   routes
+})
+
+/**
+ * 全局前置守卫：任何页面访问都要经过这里
+ * to: 跳转至
+ * from: 来源页
+ * next: 通行标志，在允许跳转后调用才能允许跳转
+ */
+router.beforeEach((to, from, next) => {
+  console.log('to =>', to)
+  console.log(from)
+  // matched 是一个数组（匹配到的是路由记录）
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    // 需要页面身份验证再判断身份验证是否正常
+    console.log('store =>', store.state.user)
+    if (!store.state.user) {
+      next({
+        name: 'login',
+        query: {
+          redirect: to.fullPath
+        }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
 })
 
 export default router
