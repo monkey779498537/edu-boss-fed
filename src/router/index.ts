@@ -66,6 +66,12 @@ const routes: Array<RouteConfig> = [
         path: '/menu/:id/edit',
         name: 'menu-edit',
         component: () => import(/* webpackChunkName: 'menu-create' */ '@/views/menu/edit.vue')
+      },
+      {
+        path: '/role/:roleId/alloc-menu',
+        name: 'alloc-menu',
+        component: () => import(/* webpackChunName： 'alloc-menu' */ '@/views/role/alloc-menu.vue'),
+        props: true // 将路由路径参数映射到组件的props中
       }
     ]
   },
@@ -87,8 +93,6 @@ const router = new VueRouter({
  * next: 通行标志，在允许跳转后调用才能允许跳转
  */
 router.beforeEach((to, from, next) => {
-  console.log('to =>', to)
-  console.log(from)
   // matched 是一个数组（匹配到的是路由记录）
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // 需要页面身份验证再判断身份验证是否正常
