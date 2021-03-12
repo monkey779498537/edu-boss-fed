@@ -13,6 +13,7 @@ module.exports = {
     }
   },
   devServer: {
+    // 此代理仅仅针对本地开发服务（npm run serve）
     proxy: { // 配置代理跨域
       '/boss': { // 所有boss开头的请求都会转发到target开发地址
         target: 'http://eduboss.lagou.com', // 不支持https
