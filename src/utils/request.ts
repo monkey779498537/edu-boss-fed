@@ -32,7 +32,6 @@ function refreshToken () {
 // 请求拦截
 request.interceptors.request.use(function (config) {
   // 发送之前
-  console.log('config =>', config)
   const { user } = store.state
   if (user && user.access_token) {
     config.headers.Authorization = user.access_token
@@ -48,11 +47,9 @@ let isRfreshing = false // 控制刷新 token 的状态
 let requests: any[] = [] // 刷新 token 期间过来的401请求，后续需要重新发出去
 request.interceptors.response.use(function (response) { // 状态码2XXX时
   // 响应成功后
-  console.log('响应成功 ==>', response)
   return response
 }, async function (error) { // 状态码非2xxx时
   // 响应错误
-  console.log('响应失败 ==>', error)
   if (error.response) { // 请求发出去收到响应了，但状态码超出2xx范围
     // 400  未授权，token失效
     // 401  token无效（未提供token、token过期、token伪造）

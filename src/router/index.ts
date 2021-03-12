@@ -77,6 +77,30 @@ const routes: Array<RouteConfig> = [
         path: '/course/created',
         name: 'course-create',
         component: () => import(/* webpackChunName: 'course-create' */ '@/views/course/create.vue')
+      },
+      {
+        path: '/course/:courseId/edit',
+        name: 'course-edit',
+        component: () => import(/* webpackChunkName: 'course-edit' */ '@/views/course/edit.vue'),
+        props: true
+      },
+      {
+        path: '/course/:courseId/section',
+        name: 'course-section',
+        component: () => import(/* webpackChunkName: 'course-section' */ '@/views/course/section.vue'),
+        props: true
+      },
+      {
+        path: '/course/:courseId/video',
+        name: 'course-video',
+        component: () => import(/* webpackChunName: 'course-video' */ '@/views/course/video.vue'),
+        props: true
+      },
+      {
+        path: '/course/:courseId/video-demo',
+        name: 'course-video-demo',
+        component: () => import(/* webpackChunName: 'course-video' */ '@/views/course/video-demo.vue'),
+        props: true
       }
     ]
   },
@@ -101,7 +125,6 @@ router.beforeEach((to, from, next) => {
   // matched 是一个数组（匹配到的是路由记录）
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // 需要页面身份验证再判断身份验证是否正常
-    console.log('store =>', store.state.user)
     if (!store.state.user) {
       next({
         name: 'login',

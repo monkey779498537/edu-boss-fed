@@ -28,15 +28,19 @@ export const saveOrUpdateCourse = (data: any) => {
   })
 }
 
-export const uploadCourseImage = (data: any, onUploadProgress: (progressEvent: ProgressEvent) => void) => {
+export const uploadCourseImage = (data: any, onUploadProgress?: (progressEvent: ProgressEvent) => void) => {
   // 该接口要求的请求数据类型是：multipart/form-data
   // 所以需要提交 FormData 数据对象
   return request({
     method: 'POST',
     url: '/boss/course/upload',
     data,
-    // HTML5 新增的上传响应事件：progress
     onUploadProgress
+    // HTML5 新增的上传响应事件：progress
+    // onUploadProgress (e) {
+    //   console.log(e.loaded) // 已上传的数据大小
+    //   console.log(e.total) // 上传文件的总大小
+    // }
   })
 }
 
